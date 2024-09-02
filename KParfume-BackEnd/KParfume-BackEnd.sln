@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{AF4F4F76-2A60-4BEC-BD7A-FD61CF2EEE3A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KParfume.API", "KParfume.API\KParfume.API.csproj", "{01915345-3789-4D5A-A5CD-517AE8E7DAE6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KParfume.Core", "KParfume.Core\KParfume.Core.csproj", "{D8AAF48E-755E-44DD-9F0D-0C4CD828CABD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KParfume.Infrastructure", "KParfume.Infrastructure\KParfume.Infrastructure.csproj", "{A887B006-6250-4CD3-BEF7-73AB867B9F5A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KParfume-BackEnd", "KParfume-BackEnd\KParfume-BackEnd.csproj", "{7B81808F-F2D1-4494-8017-C16561B861EF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KParfume.BuildingBlocks.Core", "KParfume.BuildingBlocks.Core\KParfume.BuildingBlocks.Core.csproj", "{39AA9700-C398-4674-8166-3D7881B73903}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KParfume.BuildingBlocks.Infrastructure", "KParfume.BuildingBlocks.Infrastructure\KParfume.BuildingBlocks.Infrastructure.csproj", "{5A2B11CF-DF82-43AD-BC01-50D79A75AD0F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01915345-3789-4D5A-A5CD-517AE8E7DAE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01915345-3789-4D5A-A5CD-517AE8E7DAE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01915345-3789-4D5A-A5CD-517AE8E7DAE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01915345-3789-4D5A-A5CD-517AE8E7DAE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8AAF48E-755E-44DD-9F0D-0C4CD828CABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8AAF48E-755E-44DD-9F0D-0C4CD828CABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8AAF48E-755E-44DD-9F0D-0C4CD828CABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8AAF48E-755E-44DD-9F0D-0C4CD828CABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A887B006-6250-4CD3-BEF7-73AB867B9F5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A887B006-6250-4CD3-BEF7-73AB867B9F5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A887B006-6250-4CD3-BEF7-73AB867B9F5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A887B006-6250-4CD3-BEF7-73AB867B9F5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B81808F-F2D1-4494-8017-C16561B861EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B81808F-F2D1-4494-8017-C16561B861EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B81808F-F2D1-4494-8017-C16561B861EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B81808F-F2D1-4494-8017-C16561B861EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39AA9700-C398-4674-8166-3D7881B73903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39AA9700-C398-4674-8166-3D7881B73903}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39AA9700-C398-4674-8166-3D7881B73903}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39AA9700-C398-4674-8166-3D7881B73903}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A2B11CF-DF82-43AD-BC01-50D79A75AD0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A2B11CF-DF82-43AD-BC01-50D79A75AD0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A2B11CF-DF82-43AD-BC01-50D79A75AD0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A2B11CF-DF82-43AD-BC01-50D79A75AD0F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{39AA9700-C398-4674-8166-3D7881B73903} = {AF4F4F76-2A60-4BEC-BD7A-FD61CF2EEE3A}
+		{5A2B11CF-DF82-43AD-BC01-50D79A75AD0F} = {AF4F4F76-2A60-4BEC-BD7A-FD61CF2EEE3A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {757D70AE-D0E8-4940-B6E0-FF8DDFF46E3F}
+	EndGlobalSection
+EndGlobal
