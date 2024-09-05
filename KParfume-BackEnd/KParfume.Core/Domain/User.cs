@@ -16,6 +16,7 @@ namespace KParfume.Core.Domain
         public string kor_drzava { get; private set; }
         public string kor_tel { get; private set; }
         public long? kor_fab_id { get; private set; }
+        public virtual Fabrika Fabrika { get; private set; }
         public string? kor_ime_kompanije { get; private set; }
     
         public User(string kor_email, string kor_lozinka, UserRole kor_uloga, string kor_ime, string kor_prezime, string kor_adresa, string kor_grad, int kor_pos_br, string kor_drzava, string kor_tel, long? kor_fab_id, string? kor_ime_kompanije)

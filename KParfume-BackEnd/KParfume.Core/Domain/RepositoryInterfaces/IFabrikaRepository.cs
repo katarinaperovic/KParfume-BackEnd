@@ -13,6 +13,7 @@ namespace KParfume.Core.Domain.RepositoryInterfaces
         List<Fabrika> GetAll();
         void Remove(Fabrika fabrika);
         void Save();
+        bool Exists(long id);
 
     }
 }

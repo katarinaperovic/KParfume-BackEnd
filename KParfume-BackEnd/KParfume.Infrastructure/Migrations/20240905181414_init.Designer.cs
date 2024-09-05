@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KParfume.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240902213023_Migr2")]
-    partial class Migr2
+    [Migration("20240905181414_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,54 @@ namespace KParfume.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("KParfume.Core.Domain.Fabrika", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("fab_adresa")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("fab_drzava")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("fab_grad")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("fab_logo")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("fab_naziv")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("fab_pos_br")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("fab_tel")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("fab_vreme_do")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("fab_vreme_od")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Fabrika", "KParfumeSchema");
+                });
 
             modelBuilder.Entity("KParfume.Core.Domain.User", b =>
                 {
@@ -83,7 +131,18 @@ namespace KParfume.Infrastructure.Migrations
                     b.HasIndex("kor_email")
                         .IsUnique();
 
+                    b.HasIndex("kor_fab_id");
+
                     b.ToTable("Korisnik", "KParfumeSchema");
+                });
+
+            modelBuilder.Entity("KParfume.Core.Domain.User", b =>
+                {
+                    b.HasOne("KParfume.Core.Domain.Fabrika", "Fabrika")
+                        .WithMany()
+                        .HasForeignKey("kor_fab_id");
+
+                    b.Navigation("Fabrika");
                 });
 #pragma warning restore 612, 618
         }

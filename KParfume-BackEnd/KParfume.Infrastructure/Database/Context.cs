@@ -22,6 +22,17 @@ namespace KParfume.Infrastructure.Database
 
             modelBuilder.Entity<User>().HasIndex(u => u.kor_email).IsUnique();
 
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasIndex(u => u.kor_email).IsUnique();
+                // Setting up the foreign key relationship
+                entity.HasOne(u => u.Fabrika)
+                      .WithMany()
+                      .HasForeignKey(u => u.kor_fab_id)
+                      .IsRequired(false); // This line ensures the FK is optional
+            });
+
+
             Configure(modelBuilder);
         }
 

@@ -44,5 +44,10 @@ namespace KParfume.Infrastructure.Database.Repositories
             _dbContext.SaveChanges();
         }
 
+        public bool Exists(long id)
+        {
+            return _dbContext.Fabrika.Any(fabrika => fabrika.Id == id);
+        }
+
     }
 }

@@ -128,7 +128,18 @@ namespace KParfume.Infrastructure.Migrations
                     b.HasIndex("kor_email")
                         .IsUnique();
 
+                    b.HasIndex("kor_fab_id");
+
                     b.ToTable("Korisnik", "KParfumeSchema");
+                });
+
+            modelBuilder.Entity("KParfume.Core.Domain.User", b =>
+                {
+                    b.HasOne("KParfume.Core.Domain.Fabrika", "Fabrika")
+                        .WithMany()
+                        .HasForeignKey("kor_fab_id");
+
+                    b.Navigation("Fabrika");
                 });
 #pragma warning restore 612, 618
         }
