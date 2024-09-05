@@ -8,6 +8,7 @@ namespace KParfume.API.DTOs
 {
     public class FabrikaDto
     {
+        public long Id { get; set; }
         public string fab_naziv { get; set; }
         public string fab_adresa { get; set; }
         public string fab_grad { get; set; }

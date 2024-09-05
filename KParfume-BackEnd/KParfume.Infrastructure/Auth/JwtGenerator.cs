@@ -49,11 +49,22 @@ namespace KParfume.Infrastructure.Auth
             new("kor_pos_br", user.kor_pos_br.ToString()),
             new("kor_drzava", user.kor_drzava),
             new("kor_tel", user.kor_tel),
-            new("kor_fab_id", user.kor_fab_id.ToString()),
-            new("kor_ime_kompanije", user.kor_ime_kompanije)
         };
 
-            var jwt = CreateToken(claims, dInMinutes);
+
+            // Add 'kor_fab_id' only if it is not null
+            if (user.kor_fab_id.HasValue)
+            {
+                claims.Add(new Claim("kor_fab_id", user.kor_fab_id.Value.ToString()));
+            }
+
+            if (user.kor_ime_kompanije != null)
+            {
+                claims.Add(new Claim("kor_ime_kompanije", user.kor_ime_kompanije));
+            }
+
+            // Create JWT with the defined claims
+            var jwt = CreateToken(claims, dInMinutes); // Ensure dInMinutes is properly defined and passed to this method
             authenticationResponse.Id = user.Id;
             authenticationResponse.AccessToken = jwt;
 
