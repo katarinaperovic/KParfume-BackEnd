@@ -30,13 +30,17 @@ namespace KParfume.Infrastructure
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ITokenGenerator,JwtGenerator>();
+            services.AddScoped<IFabrikaService,FabrikaService>();
 
         }
 
         private static void SetupInfrastructure(IServiceCollection services)
         {
             services.AddScoped(typeof(ICrudRepository<User>), typeof(CrudDatabaseRepository<User, Context>));
+            services.AddScoped(typeof(ICrudRepository<Fabrika>), typeof(CrudDatabaseRepository<Fabrika, Context>));
+
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IFabrikaRepository, FabrikaRepository>();
 
             services.AddDbContext<Context>(opt =>
                 opt.UseNpgsql(DbConnectionStringBuilder.Build("KParfumeSchema"),

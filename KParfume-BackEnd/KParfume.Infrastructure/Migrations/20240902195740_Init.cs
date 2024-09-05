@@ -9,6 +9,12 @@ namespace KParfume.Infrastructure.Migrations
     public partial class Init : Migration
     {
         /// <inheritdoc />
+        /// 
+
+        /*
+         Add-Migration -Name Init -Context Context -Project KParfume.Infrastructure -StartupProject KParfume-BackEnd
+         Update-Database -Context Context -Project KParfume.Infrastructure -StartupProject Kparfume-BackEnd
+         */
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(

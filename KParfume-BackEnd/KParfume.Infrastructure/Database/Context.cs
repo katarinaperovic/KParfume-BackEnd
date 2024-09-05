@@ -12,6 +12,8 @@ namespace KParfume.Infrastructure.Database
     {
         public DbSet<User> Korisnik { get; set; }
 
+        public DbSet<Fabrika> Fabrika { get; set; }
+
         public Context(DbContextOptions<Context> options) : base(options){}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
