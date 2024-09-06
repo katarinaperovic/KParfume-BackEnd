@@ -17,6 +17,7 @@ namespace KParfume.Infrastructure.Database
         public DbSet<TipParfema> Tip_parfema { get; set; }
         public DbSet<KategorijaParfema> Kategorija_parfema { get; set; }
         public DbSet<Vest> Vest { get; set; }
+        public DbSet<Komentar> Komentar { get; set; }
 
         public Context(DbContextOptions<Context> options) : base(options){}
 
@@ -89,6 +90,23 @@ namespace KParfume.Infrastructure.Database
                 //entity.Property(v => v.ves_slika).IsRequired();
                 entity.Property(v => v.ves_tekst).IsRequired();
                 entity.Property(v => v.ves_naslov).IsRequired();
+            });
+
+
+            modelBuilder.Entity<Komentar>(entity =>
+            {
+                entity.HasOne(k => k.User)
+                      .WithMany()
+                      .HasForeignKey(k => k.kom_kor_id)
+                      .IsRequired();
+
+                entity.HasOne(k => k.Vest)
+                      .WithMany()
+                      .HasForeignKey(k => k.kom_ves_id)
+                      .IsRequired();
+
+                entity.Property(k => k.kom_datum).IsRequired();
+                entity.Property(k => k.kom_tekst).IsRequired();
             });
         }
     }

@@ -34,6 +34,7 @@ namespace KParfume.Infrastructure
             services.AddScoped<IParfemService,ParfemService>();
             services.AddScoped<ISvojstvaParfemaService, SvojstvaParfemaService>();
             services.AddScoped<IVestService, VestService>();
+            services.AddScoped<IKomentarService, KomentarService>();
 
         }
 
@@ -46,6 +47,7 @@ namespace KParfume.Infrastructure
             services.AddScoped(typeof(ICrudRepository<TipParfema>), typeof(CrudDatabaseRepository<TipParfema, Context>));
             services.AddScoped(typeof(ICrudRepository<KategorijaParfema>), typeof(CrudDatabaseRepository<KategorijaParfema, Context>));
             services.AddScoped(typeof(ICrudRepository<Vest>), typeof(CrudDatabaseRepository<Vest, Context>));
+            services.AddScoped(typeof(ICrudRepository<Komentar>), typeof(CrudDatabaseRepository<Komentar, Context>));
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFabrikaRepository, FabrikaRepository>();
@@ -54,6 +56,7 @@ namespace KParfume.Infrastructure
             services.AddScoped<ITipParfemaRepository, TipParfemaRepository>();
             services.AddScoped<IKategorijaParfemaRepository, KategorijaParfemaRepository>();
             services.AddScoped<IVestRepository, VestRepository>();
+            services.AddScoped<IKomentarRepository, KomentarRepository>();
 
             services.AddDbContext<Context>(opt =>
                 opt.UseNpgsql(DbConnectionStringBuilder.Build("KParfumeSchema"),
