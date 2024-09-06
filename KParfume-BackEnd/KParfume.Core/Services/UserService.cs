@@ -28,6 +28,12 @@ namespace KParfume.Core.Services
             return MapToDto(user);
         }
 
+        public Result<List<UserDto>> GetAll()
+        {
+            var users = UserRepository.GetAll().ToList();
+            return MapToDto(users);
+        }
+
 
     }
 }

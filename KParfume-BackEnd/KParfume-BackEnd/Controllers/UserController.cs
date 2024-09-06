@@ -1,6 +1,7 @@
 ﻿using KParfume.API.Controllers;
 using KParfume.API.DTOs;
 using KParfume.API.Public;
+using KParfume.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +24,13 @@ namespace KParfume_BackEnd.Controllers
                     var result = _userService.GetById(userId);
                     return CreateResponse(result);
                 }*/
+
+        [HttpGet]
+        public ActionResult<List<UserDto>> GetAll()
+        {
+            var result = _userService.GetAll();
+            return CreateResponse(result);
+        }
 
         [HttpGet("GetById")]
         public ActionResult<UserDto> GetById()

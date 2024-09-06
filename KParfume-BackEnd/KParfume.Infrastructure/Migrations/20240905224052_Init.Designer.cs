@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KParfume.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240905205800_init")]
-    partial class init
+    [Migration("20240905224052_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

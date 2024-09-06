@@ -17,6 +17,10 @@ namespace KParfume.Infrastructure.Database.Repositories
             return user;
         }
 
+        public List<User> GetAll()
+        {
+            return _dbContext.Korisnik.ToList();
+        }
         public User? GetActiveByName(string username)
         {
             return _dbContext.Korisnik.FirstOrDefault(user => user.kor_email == username );
