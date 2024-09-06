@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/KParfume-BackEnd/KParfume.Infrastructure/Migrations/*.cs
