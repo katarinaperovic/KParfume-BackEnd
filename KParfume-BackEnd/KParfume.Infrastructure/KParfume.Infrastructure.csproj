@@ -30,4 +30,8 @@
     <ProjectReference Include="..\KParfume.Core\KParfume.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
