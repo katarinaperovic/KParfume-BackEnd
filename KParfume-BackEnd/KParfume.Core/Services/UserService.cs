@@ -5,12 +5,6 @@ using KParfume.BuildingBlocks.Core.UseCases;
 using KParfume.Core.Domain;
 using KParfume.Core.Domain.RepositoryInterfaces;
 using FluentResults;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KParfume.Core.Services
 {

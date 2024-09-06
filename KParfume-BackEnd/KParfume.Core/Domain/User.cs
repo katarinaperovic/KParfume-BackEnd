@@ -1,5 +1,4 @@
 ﻿using KParfume.BuildingBlocks.Core.Domain;
-using System.Diagnostics.CodeAnalysis;
 
 namespace KParfume.Core.Domain
 {

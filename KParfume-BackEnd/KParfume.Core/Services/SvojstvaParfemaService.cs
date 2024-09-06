@@ -1,14 +1,7 @@
-﻿using AutoMapper;
-using KParfume.API.DTOs;
+﻿using KParfume.API.DTOs;
 using KParfume.API.Public;
-using KParfume.BuildingBlocks.Core.UseCases;
-using KParfume.Core.Domain;
 using KParfume.Core.Domain.RepositoryInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace KParfume.Core.Services
 {
