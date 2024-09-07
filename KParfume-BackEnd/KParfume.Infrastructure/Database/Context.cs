@@ -13,6 +13,8 @@ namespace KParfume.Infrastructure.Database
         public DbSet<KategorijaParfema> Kategorija_parfema { get; set; }
         public DbSet<Vest> Vest { get; set; }
         public DbSet<Komentar> Komentar { get; set; }
+        public DbSet<Kupon> Kupon { get; set; }
+        public DbSet<Ocena> Ocena { get; set; }
 
         public Context(DbContextOptions<Context> options) : base(options){}
 
@@ -102,6 +104,32 @@ namespace KParfume.Infrastructure.Database
 
                 entity.Property(k => k.kom_datum).IsRequired();
                 entity.Property(k => k.kom_tekst).IsRequired();
+            });
+
+
+            modelBuilder.Entity<Kupon>(entity =>
+            {
+                entity.HasOne(v => v.User)
+                      .WithMany()
+                      .HasForeignKey(v => v.kpn_kor_id)
+                      .IsRequired();
+
+                entity.Property(v => v.kpn_opis).IsRequired();
+                entity.Property(v => v.kpn_pk_valid).IsRequired();
+                entity.Property(v => v.kpn_popust).IsRequired();
+                entity.Property(v => v.kpn_kod).IsRequired();
+            });
+
+
+            modelBuilder.Entity<Ocena>(entity =>
+            {
+                entity.HasOne(v => v.User)
+                      .WithMany()
+                      .HasForeignKey(v => v.ocn_kor_id)
+                      .IsRequired();
+
+                entity.Property(v => v.ocn_vrednost).IsRequired();
+                entity.Property(v => v.ocn_kom).IsRequired();
             });
         }
     }
