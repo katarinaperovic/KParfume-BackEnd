@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace KParfume.API.DTOs
 {
-    public class StavkaCenovnikaDto
+    public class KorpaDto
     {
         public long Id { get; set; }
-        public double sc_cena { get; set; }
-        public long sc_par_id { get; set; }
-        public long sc_cen_id { get; set; }        
+        public bool krp_prazna { get; set; }
+        public long krp_kor_id { get; set; }
     }
 }

@@ -13,13 +13,15 @@ namespace KParfume.Core.Services
         private readonly IFabrikaRepository _fabrikaRepository;
         private readonly ITokenGenerator _tokenGenerator;
         protected readonly IKuponRepository _kuponRepository;
+        private readonly IKorpaRepository _korpaRepository;
 
-        public AuthService(IUserRepository userRepository,IFabrikaRepository fabrikaRepository, ITokenGenerator tokenGenerator,IKuponRepository kuponRepository)
+        public AuthService(IUserRepository userRepository,IFabrikaRepository fabrikaRepository, ITokenGenerator tokenGenerator,IKuponRepository kuponRepository, IKorpaRepository korpaRepository)
         {
             _userRepository = userRepository;
             _fabrikaRepository = fabrikaRepository;
             _tokenGenerator = tokenGenerator;
             _kuponRepository = kuponRepository;
+            _korpaRepository = korpaRepository;
         }
 
         public Result<AuthenticationTokensDto> Login(LoginDto credentials)
@@ -56,6 +58,12 @@ namespace KParfume.Core.Services
                 );
                 
                 User kor=_userRepository.Create(user);
+
+                if (account.kor_uloga == UserRoleDto.KUPAC)
+                {
+                    var korpa = new Korpa(true, kor.Id);
+                    _korpaRepository.Create(korpa);
+                }
 
                 string kpn_kod = GenerateRandomKuponCode();
                 string kpn_opis = "Iskoristite kupon dobrodošlice na prvu kupovinu. Primenjuje se na celokupan iznos prve kupovine.";

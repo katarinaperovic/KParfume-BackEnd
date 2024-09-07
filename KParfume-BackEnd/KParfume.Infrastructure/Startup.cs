@@ -39,6 +39,8 @@ namespace KParfume.Infrastructure
             services.AddScoped<IOcenaService, OcenaService>();
             services.AddScoped<ICenovnikService, CenovnikService>();
             services.AddScoped<IStavkaCenovnikaService,StavkaCenovnikaService>();
+            services.AddScoped<IKorpaService, KorpaService>();
+            services.AddScoped<IStavkaKorpeService, StavkaKorpeService>();
 
         }
 
@@ -56,6 +58,8 @@ namespace KParfume.Infrastructure
             services.AddScoped(typeof(ICrudRepository<Ocena>), typeof(CrudDatabaseRepository<Ocena, Context>));
             services.AddScoped(typeof(ICrudRepository<Cenovnik>), typeof(CrudDatabaseRepository<Cenovnik, Context>));
             services.AddScoped(typeof(ICrudRepository<StavkaCenovnika>), typeof(CrudDatabaseRepository<StavkaCenovnika, Context>));
+            services.AddScoped(typeof(ICrudRepository<Korpa>), typeof(CrudDatabaseRepository<Korpa, Context>));
+            services.AddScoped(typeof(ICrudRepository<StavkaKorpe>), typeof(CrudDatabaseRepository<StavkaKorpe, Context>));
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFabrikaRepository, FabrikaRepository>();
@@ -69,6 +73,8 @@ namespace KParfume.Infrastructure
             services.AddScoped<IOcenaRepository, OcenaRepository>();
             services.AddScoped<ICenovnikRepository, CenovnikRepository>();
             services.AddScoped<IStavkaCenovnikaRepository, StavkaCenovnikaRepository>();
+            services.AddScoped<IKorpaRepository, KorpaRepository>();
+            services.AddScoped<IStavkaKorpeRepository, StavkaKorpeRepository>();
 
             services.AddDbContext<Context>(opt =>
                 opt.UseNpgsql(DbConnectionStringBuilder.Build("KParfumeSchema"),
