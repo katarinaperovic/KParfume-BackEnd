@@ -15,6 +15,8 @@ namespace KParfume.Infrastructure.Database
         public DbSet<Komentar> Komentar { get; set; }
         public DbSet<Kupon> Kupon { get; set; }
         public DbSet<Ocena> Ocena { get; set; }
+        public DbSet<Cenovnik> Cenovnik { get; set; }
+        public DbSet<StavkaCenovnika> StavkaCenovnika { get; set; }
 
         public Context(DbContextOptions<Context> options) : base(options){}
 
@@ -130,6 +132,31 @@ namespace KParfume.Infrastructure.Database
 
                 entity.Property(v => v.ocn_vrednost).IsRequired();
                 entity.Property(v => v.ocn_kom).IsRequired();
+            });
+
+            modelBuilder.Entity<Cenovnik>(entity =>
+            {
+                entity.HasOne(c => c.Fabrika)
+                      .WithMany()
+                      .HasForeignKey(c => c.cen_fab_id)
+                      .IsRequired();
+
+                entity.Property(c => c.cen_dat_poc).IsRequired();
+            });
+
+            modelBuilder.Entity<StavkaCenovnika>(entity =>
+            {
+                entity.HasOne(s => s.Parfem)
+                      .WithMany()
+                      .HasForeignKey(s => s.sc_par_id)
+                      .IsRequired();
+
+                entity.HasOne(s => s.Cenovnik)
+                      .WithMany()
+                      .HasForeignKey(s => s.sc_cen_id)
+                      .IsRequired();
+
+                entity.Property(s => s.sc_cena).IsRequired();
             });
         }
     }

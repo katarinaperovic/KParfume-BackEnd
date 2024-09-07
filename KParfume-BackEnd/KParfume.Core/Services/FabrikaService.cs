@@ -11,10 +11,12 @@ namespace KParfume.Core.Services
     public class FabrikaService : BaseService<FabrikaDto,Fabrika>,IFabrikaService
     {
         protected readonly IFabrikaRepository _fabrikaRepository;
+        protected readonly ICenovnikRepository _cenovnikRepository;
 
-        public FabrikaService(IFabrikaRepository fabrikaRepository,IMapper mapper) : base(mapper)
+        public FabrikaService(IFabrikaRepository fabrikaRepository,ICenovnikRepository cenovnikRepository,IMapper mapper) : base(mapper)
         {
             _fabrikaRepository = fabrikaRepository;
+            _cenovnikRepository = cenovnikRepository;
         }
 
         public Result<FabrikaDto> Create(FabrikaDto fabrikaDto)
@@ -23,6 +25,10 @@ namespace KParfume.Core.Services
             {
                 Fabrika fabrika = MapToDomain(fabrikaDto);
                 fabrika = _fabrikaRepository.Create(fabrika);
+
+                DateOnly cenovnikDate = DateOnly.FromDateTime(DateTime.Now);
+                Cenovnik cenovnik = new Cenovnik(cenovnikDate,fabrika.Id);
+                _cenovnikRepository.Create(cenovnik);
 
                 return Result.Ok(MapToDto(fabrika));
             }
