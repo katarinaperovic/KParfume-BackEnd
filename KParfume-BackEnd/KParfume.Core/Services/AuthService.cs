@@ -12,12 +12,14 @@ namespace KParfume.Core.Services
         private readonly IUserRepository _userRepository;
         private readonly IFabrikaRepository _fabrikaRepository;
         private readonly ITokenGenerator _tokenGenerator;
+        protected readonly IKuponRepository _kuponRepository;
 
-        public AuthService(IUserRepository userRepository,IFabrikaRepository fabrikaRepository, ITokenGenerator tokenGenerator)
+        public AuthService(IUserRepository userRepository,IFabrikaRepository fabrikaRepository, ITokenGenerator tokenGenerator,IKuponRepository kuponRepository)
         {
             _userRepository = userRepository;
             _fabrikaRepository = fabrikaRepository;
             _tokenGenerator = tokenGenerator;
+            _kuponRepository = kuponRepository;
         }
 
         public Result<AuthenticationTokensDto> Login(LoginDto credentials)
@@ -52,8 +54,18 @@ namespace KParfume.Core.Services
                     account.kor_fab_id, 
                     account.kor_ime_kompanije
                 );
+                
+                User kor=_userRepository.Create(user);
 
-                _userRepository.Create(user);
+                string kpn_kod = GenerateRandomKuponCode();
+                string kpn_opis = "Iskoristite kupon dobrodošlice na prvu kupovinu. Primenjuje se na celokupan iznos prve kupovine.";
+                double kpn_popust = 10;
+                Boolean kpn_aktivan = true;
+                Boolean kpn_pk_valid =true;
+               
+                Kupon k = new Kupon(kor.Id,kpn_kod,kpn_opis,kpn_popust,kpn_aktivan,kpn_pk_valid);
+                _kuponRepository.Create(k);
+
                 return _tokenGenerator.GenerateAccessToken(user);
             }
             catch (ArgumentException e)
@@ -61,6 +73,23 @@ namespace KParfume.Core.Services
                 return Result.Fail(FailureCode.InvalidArgument).WithError(e.Message);
             }
         }
+
+        private string GenerateRandomKuponCode()
+        {
+            Random random = new Random();
+
+            // Generate 3 random numbers (100-999)
+            string numbers = random.Next(1, 10).ToString();
+
+            // Generate 3 random uppercase letters
+            string letters = new string(Enumerable.Range(0, 3)
+                                     .Select(x => (char)random.Next('A', 'Z' + 1))
+                                     .ToArray());
+
+            // Combine numbers and letters to form the kupon code
+            return letters+numbers;
+        }
+
 
     }
 }

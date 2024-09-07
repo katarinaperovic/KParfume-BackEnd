@@ -30,7 +30,10 @@ namespace KParfume.Infrastructure.Database.Repositories
         {
             return _dbContext.Korisnik.Any(user => user.kor_email == username);
         }
-
+        public User Get(long id)
+        {
+            return _dbContext.Korisnik.Find(id);
+        }
         public User Create(User user)
         {
             _dbContext.Korisnik.Add(user);

@@ -32,6 +32,17 @@ namespace KParfume_BackEnd.Controllers
             return CreateResponse(result);
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<UserDto> Get(long id)
+        {
+            var result = _userService.Get(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+
         [HttpGet("GetById")]
         public ActionResult<UserDto> GetById()
         {

@@ -6,6 +6,7 @@ namespace KParfume.API.Public
     public interface IUserService
     {
         Result<UserDto> GetById(long userId);
+        UserDto Get(long id);
         Result<List<UserDto>> GetAll();
     }
 }
