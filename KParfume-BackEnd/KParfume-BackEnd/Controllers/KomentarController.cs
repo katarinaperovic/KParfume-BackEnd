@@ -34,6 +34,13 @@ namespace KParfume_BackEnd.Controllers
             return Ok(result);
         }
 
+        [HttpGet("vest/{vestId}")]
+        public ActionResult<List<KomentarDto>> GetCommentsByVestId(long vestId)
+        {
+            var result = _komentarService.GetCommentsByVestId(vestId);
+            return Ok(result);
+        }
+
         [HttpGet]
         public ActionResult<List<KomentarDto>> GetAll()
         {

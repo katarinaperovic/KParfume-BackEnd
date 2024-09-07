@@ -48,7 +48,11 @@ namespace KParfume.Core.Services
             var komentars = _komentarRepository.GetAll().ToList();
             return MapToDto(komentars);
         }
-
+        public Result<List<KomentarDto>> GetCommentsByVestId(long vestId)
+        {
+            var komentars = _komentarRepository.GetByVestId(vestId).ToList();
+            return MapToDto(komentars);
+        }
         public Result<KomentarDto> Remove(long id)
         {
             try

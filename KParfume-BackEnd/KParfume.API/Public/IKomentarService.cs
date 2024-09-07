@@ -8,6 +8,7 @@ namespace KParfume.API.Public
         Result<KomentarDto> Create(KomentarDto komentarDto);
         KomentarDto Get(long id);
         Result<List<KomentarDto>> GetAll();
+        Result<List<KomentarDto>> GetCommentsByVestId(long vestId);
         Result<KomentarDto> Remove(long id);
 
     }

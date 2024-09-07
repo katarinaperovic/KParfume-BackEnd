@@ -22,6 +22,10 @@ namespace KParfume.Infrastructure.Database.Repositories
         {
             return _dbContext.Komentar.Find(id);
         }
+        public List<Komentar> GetByVestId(long vestId)
+        {
+            return _dbContext.Komentar.Where(k => k.kom_ves_id == vestId).ToList();
+        }
 
         public List<Komentar> GetAll()
         {
