@@ -98,6 +98,27 @@ namespace KParfume.Core.Services
             return Result.Ok<StavkaKorpeDto>(MapToDto(stavkaKorpe));
         }
 
+        public Result<List<StavkaKorpeDto>> RemoveAllByUserId(long userId)
+        {
+            var korpa = _korpaRepository.GetByUserId(userId);
+
+            var stavkeKorpe = _stavkaKorpeRepository.GetAllByKorpaId(korpa.Id).ToList();
+            if (stavkeKorpe.Count <= 0)
+            {
+                return Result.Fail<List<StavkaKorpeDto>>(FailureCode.NotFound);
+            }
+
+            foreach (var stavkaKorpe in stavkeKorpe)
+            {
+                _stavkaKorpeRepository.Remove(stavkaKorpe);
+            }
+
+            korpa.KorpaJePrazna();
+            _korpaRepository.Save();
+
+            return Result.Ok<List<StavkaKorpeDto>>(MapToDto(stavkeKorpe).Value);
+        }   
+
         public Result<StavkaKorpeDto> InkrementKolicina(long id)
         {
             StavkaKorpe stavkaKorpe = _stavkaKorpeRepository.Get(id);
@@ -156,6 +177,8 @@ namespace KParfume.Core.Services
 
             return Result.Ok<StavkaKorpeDto>(MapToDto(stavkaKorpe));
         }
+
+
 
 
     }

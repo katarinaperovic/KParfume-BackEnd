@@ -70,6 +70,19 @@ namespace KParfume_BackEnd.Controllers
             return BadRequest(result.Errors);
         }
 
+
+
+        [HttpDelete("user/{id}")]
+        public ActionResult RemoveByKorpaId(long id) // POZVATI POSLE SVAKE USPESNE KUPOVINE UGNJEZDENO NA FRONTU KAKO BI ISPRAZNILI KORPU TOG USERA, UMESTO KROZ HEADER MOGU ISTO DA SALJEM USERID OD ULOGOVANOG, IZVUCEM IZ JWTA
+        {
+            var result = _stavkaKorpeService.RemoveAllByUserId(id);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return BadRequest(result.Errors);
+        }
+
         [HttpPut("inkrement/{id}")]
         public ActionResult InkrementKolicina(long id)
         {

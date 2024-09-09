@@ -29,6 +29,11 @@ namespace KParfume.Infrastructure.Database.Repositories
             return _dbContext.Korpa.Find(id);
         }
 
+        public Korpa GetByUserId(long id)
+        {
+            return _dbContext.Korpa.Where(k => k.krp_kor_id == id).FirstOrDefault();
+        }
+
         public List<Korpa> GetAll()
         {
             return _dbContext.Korpa.ToList();

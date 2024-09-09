@@ -45,6 +45,16 @@ namespace KParfume.Infrastructure.Database.Repositories
             _dbContext.SaveChanges();
         }
 
+        public void RemoveAllByKorpaId(long id)
+        {
+            var stavkeKorpe = _dbContext.StavkaKorpe.Where(sk => sk.skrp_krp_id == id).ToList();
+            foreach (var stavkaKorpe in stavkeKorpe)
+            {
+                _dbContext.StavkaKorpe.Remove(stavkaKorpe);
+            }
+            _dbContext.SaveChanges();
+        }
+
         public void Save()
         {
             _dbContext.SaveChanges();

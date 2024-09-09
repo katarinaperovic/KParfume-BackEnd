@@ -10,6 +10,7 @@ namespace KParfume.Core.Domain.RepositoryInterfaces
     {
         Korpa Create(Korpa korpa);
         Korpa Get(long id);
+        Korpa GetByUserId(long id);
         List<Korpa> GetAll();
         void Remove(Korpa korpa);
         void Save();

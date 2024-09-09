@@ -15,6 +15,7 @@ namespace KParfume.API.Public
         public Result<List<StavkaKorpeDto>> GetAll();
         public Result<List<StavkaKorpeDto>> GetAllByKorpaId(long id);
         public Result<StavkaKorpeDto> Remove(long id);
+        public Result<List<StavkaKorpeDto>> RemoveAllByUserId(long userId);
         public Result<StavkaKorpeDto> InkrementKolicina(long id);
         public Result<StavkaKorpeDto> DekrementKolicina(long id);
 
