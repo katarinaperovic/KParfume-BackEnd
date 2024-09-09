@@ -20,9 +20,9 @@ namespace KParfume.Core.Domain
         {
             this.sk_cena_pj = sk_cena_pj;
             this.sk_par_id = sk_par_id;
-            this.Parfem = parfem;
+            
             this.sk_kup_id = sk_kup_id;
-            this.Kupovina = kupovina;
+            
             this.sk_kolicina = sk_kolicina;
         }
     }
