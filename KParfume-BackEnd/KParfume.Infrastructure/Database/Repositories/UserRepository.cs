@@ -40,5 +40,11 @@ namespace KParfume.Infrastructure.Database.Repositories
             _dbContext.SaveChanges();
             return user;
         }
+
+        public void Save()
+        {
+            _dbContext.SaveChanges();
+        }
+
     }
 }

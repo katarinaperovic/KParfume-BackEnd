@@ -50,5 +50,16 @@ namespace KParfume_BackEnd.Controllers
             var result = _userService.GetById(loggedUserId);
             return CreateResponse(result);
         }
+
+        [HttpPut("{id}")]
+        public ActionResult Update(long id, [FromBody] UserDto userDto)
+        {
+            var result = _userService.Update(id, userDto);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return BadRequest(result.Errors);
+        }
     }
 }

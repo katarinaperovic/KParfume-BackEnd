@@ -38,6 +38,42 @@ namespace KParfume.Core.Services
             return MapToDto(users);
         }
 
+        public UserRole MapToUserRole(UserRoleDto dto)
+        {
+            switch (dto)
+            {
+                case UserRoleDto.ADMINISTRATOR:
+                    return UserRole.ADMINISTRATOR;
+                case UserRoleDto.MENADZER:
+                    return UserRole.MENADZER;
+                case UserRoleDto.RADNIK:
+                    return UserRole.RADNIK;
+                case UserRoleDto.KUPAC:
+                    return UserRole.KUPAC;
+                default:
+                    throw new ArgumentException("Invalid UserRoleDto value");
+            }
+        }
+
+        public Result<UserDto> Update(long id, UserDto dto)
+        {
+            User u = UserRepository.Get(id);
+            if (u == null)
+            {
+                return Result.Fail(FailureCode.NotFound);
+            }
+            try
+            {
+                u.Update(dto.kor_email,dto.kor_lozinka, MapToUserRole(dto.kor_uloga), dto.kor_ime,dto.kor_prezime,dto.kor_adresa,dto.kor_grad,dto.kor_pos_br,dto.kor_drzava,dto.kor_tel,dto.kor_fab_id,dto.kor_ime_kompanije);
+                UserRepository.Save();
+                return MapToDto(u);
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail(FailureCode.InvalidArgument).WithError(ex.Message);
+            }
+        }
+
 
     }
 }

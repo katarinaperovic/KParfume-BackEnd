@@ -7,6 +7,7 @@ namespace KParfume.API.Public
     {
         Result<UserDto> GetById(long userId);
         UserDto Get(long id);
+        Result<UserDto> Update(long id, UserDto dto);
         Result<List<UserDto>> GetAll();
     }
 }

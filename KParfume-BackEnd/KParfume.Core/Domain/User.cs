@@ -36,6 +36,23 @@ namespace KParfume.Core.Domain
             Validate();
         }
 
+        public void Update(string kor_email, string kor_lozinka, UserRole kor_uloga, string kor_ime, string kor_prezime, string kor_adresa, string kor_grad, int kor_pos_br, string kor_drzava, string kor_tel, long? kor_fab_id, string? kor_ime_kompanije)
+        {
+            this.kor_email = kor_email;
+            this.kor_lozinka = kor_lozinka;
+            this.kor_uloga = kor_uloga;
+            this.kor_ime = kor_ime;
+            this.kor_prezime = kor_prezime;
+            this.kor_adresa = kor_adresa;
+            this.kor_grad = kor_grad;
+            this.kor_pos_br = kor_pos_br;
+            this.kor_drzava = kor_drzava;
+            this.kor_tel = kor_tel;
+            this.kor_fab_id = kor_fab_id;
+            this.kor_ime_kompanije = kor_ime_kompanije;
+
+        }
+
         private void Validate()
         {
             if (string.IsNullOrWhiteSpace(kor_email)) throw new ArgumentException("Invalid Username");

@@ -8,6 +8,7 @@ namespace KParfume.Core.Domain.RepositoryInterfaces
         User Get(long id);
         List<User> GetAll();
         bool Exists(string username);
+        void Save();
         User Create(User user);
     }
 }
