@@ -20,6 +20,7 @@ namespace KParfume.Infrastructure.Database
         public DbSet<Korpa> Korpa { get; set; }
         public DbSet<StavkaKorpe> StavkaKorpe { get; set; }
         public DbSet<Kupovina> Kupovina { get; set; }
+        public DbSet<StavkaKupovine> StavkaKupovine { get; set; }
 
         public Context(DbContextOptions<Context> options) : base(options){}
 
@@ -187,6 +188,7 @@ namespace KParfume.Infrastructure.Database
                 entity.Property(s => s.skrp_cena_pj).IsRequired();
                 entity.Property(s => s.skrp_kolicina).IsRequired();
             });
+
             modelBuilder.Entity<Kupovina>(entity =>
             {
                 entity.HasOne(k => k.Korisnik)
@@ -208,6 +210,20 @@ namespace KParfume.Infrastructure.Database
                 entity.Property(k => k.kup_valuta).IsRequired();
                 entity.Property(k => k.kup_status).IsRequired();
                 entity.Property(k => k.kup_pp_id).IsRequired();
+            });
+
+            modelBuilder.Entity<StavkaKupovine>(entity =>
+            {
+                entity.HasOne(s => s.Parfem)
+                      .WithMany()
+                      .HasForeignKey(s => s.sk_par_id)
+                      .IsRequired();
+                
+                entity.HasOne(s => s.Kupovina)
+                      .WithMany()
+                      .HasForeignKey(s => s.sk_kup_id)
+                      .IsRequired();
+
             });
         }
     }
