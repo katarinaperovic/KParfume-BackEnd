@@ -16,13 +16,11 @@ namespace KParfume.Core.Domain
         public virtual Kupovina Kupovina { get; private set; }
         public double sk_kolicina { get; private set; }
 
-        public StavkaKupovine(double sk_cena_pj, long sk_par_id, Parfem parfem, long sk_kup_id, Kupovina kupovina, double sk_kolicina)
+        public StavkaKupovine(double sk_cena_pj, long sk_par_id, long sk_kup_id, double sk_kolicina)
         {
             this.sk_cena_pj = sk_cena_pj;
-            this.sk_par_id = sk_par_id;
-            
-            this.sk_kup_id = sk_kup_id;
-            
+            this.sk_par_id = sk_par_id;            
+            this.sk_kup_id = sk_kup_id;            
             this.sk_kolicina = sk_kolicina;
         }
     }
