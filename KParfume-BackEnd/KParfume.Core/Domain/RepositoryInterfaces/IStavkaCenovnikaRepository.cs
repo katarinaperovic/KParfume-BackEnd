@@ -10,6 +10,7 @@ namespace KParfume.Core.Domain.RepositoryInterfaces
     {
         StavkaCenovnika Create(StavkaCenovnika stavkaCenovnika);
         StavkaCenovnika Get(long id);
+        StavkaCenovnika getByParfemId(long parfemId);
         List<StavkaCenovnika> GetAll();
         List<StavkaCenovnika> GetAllByCenovnikId(long cenovnikId);
         void Remove(StavkaCenovnika stavkaCenovnika);

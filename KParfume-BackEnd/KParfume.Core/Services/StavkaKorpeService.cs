@@ -17,18 +17,24 @@ namespace KParfume.Core.Services
     {
         protected readonly IStavkaKorpeRepository _stavkaKorpeRepository;
         protected readonly IKorpaRepository _korpaRepository;
+        protected readonly IStavkaCenovnikaRepository _stavkaCenovnikaRepository;
 
-        public StavkaKorpeService(IStavkaKorpeRepository stavkaKorpeRepository,IKorpaRepository korpaRepository, IMapper mapper) : base(mapper)
+        public StavkaKorpeService(IStavkaKorpeRepository stavkaKorpeRepository,IKorpaRepository korpaRepository,IStavkaCenovnikaRepository stavkaCenovnikaRepository, IMapper mapper) : base(mapper)
         {
             _stavkaKorpeRepository = stavkaKorpeRepository;
             _korpaRepository = korpaRepository;
+            _stavkaCenovnikaRepository = stavkaCenovnikaRepository;
         }
 
         public Result<StavkaKorpeDto> Create(StavkaKorpeDto stavkaKorpeDto)
         {
             try
             {
+                var cena = _stavkaCenovnikaRepository.getByParfemId(stavkaKorpeDto.skrp_par_id);
+                stavkaKorpeDto.skrp_cena_pj = cena.sc_cena;
+
                 StavkaKorpe stavkaKorpe = MapToDomain(stavkaKorpeDto);
+                                
                 stavkaKorpe = _stavkaKorpeRepository.Create(stavkaKorpe);
 
                 Korpa korpa = _korpaRepository.Get(stavkaKorpe.skrp_krp_id);

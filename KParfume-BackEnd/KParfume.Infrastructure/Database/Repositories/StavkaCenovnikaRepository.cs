@@ -29,6 +29,11 @@ namespace KParfume.Infrastructure.Database.Repositories
             return _dbContext.StavkaCenovnika.Find(id);
         }
 
+        public StavkaCenovnika getByParfemId(long parfemId)
+        {
+            return _dbContext.StavkaCenovnika.Where(s => s.sc_par_id == parfemId).FirstOrDefault();
+        }
+
         public List<StavkaCenovnika> GetAll()
         {
             return _dbContext.StavkaCenovnika.ToList();
