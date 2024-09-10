@@ -19,38 +19,38 @@ namespace KParfume.Infrastructure.Database.Repositories
 
         public StavkaKorpe Create(StavkaKorpe stavkaKorpe)
         {
-            _dbContext.StavkaKorpe.Add(stavkaKorpe);
+            _dbContext.Stavka_korpe.Add(stavkaKorpe);
             _dbContext.SaveChanges();
             return stavkaKorpe;
         }
 
         public StavkaKorpe Get(long id)
         {
-            return _dbContext.StavkaKorpe.Find(id);
+            return _dbContext.Stavka_korpe.Find(id);
         }
 
         public List<StavkaKorpe> GetAll()
         {
-            return _dbContext.StavkaKorpe.ToList();
+            return _dbContext.Stavka_korpe.ToList();
         }
 
         public List<StavkaKorpe> GetAllByKorpaId(long id)
         {
-            return _dbContext.StavkaKorpe.Where(sk=> sk.skrp_krp_id == id).ToList();
+            return _dbContext.Stavka_korpe.Where(sk=> sk.skrp_krp_id == id).ToList();
         }
 
         public void Remove(StavkaKorpe stavkaKorpe)
         {
-            _dbContext.StavkaKorpe.Remove(stavkaKorpe);
+            _dbContext.Stavka_korpe.Remove(stavkaKorpe);
             _dbContext.SaveChanges();
         }
 
         public void RemoveAllByKorpaId(long id)
         {
-            var stavkeKorpe = _dbContext.StavkaKorpe.Where(sk => sk.skrp_krp_id == id).ToList();
+            var stavkeKorpe = _dbContext.Stavka_korpe.Where(sk => sk.skrp_krp_id == id).ToList();
             foreach (var stavkaKorpe in stavkeKorpe)
             {
-                _dbContext.StavkaKorpe.Remove(stavkaKorpe);
+                _dbContext.Stavka_korpe.Remove(stavkaKorpe);
             }
             _dbContext.SaveChanges();
         }

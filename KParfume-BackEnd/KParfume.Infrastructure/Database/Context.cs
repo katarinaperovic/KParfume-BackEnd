@@ -16,11 +16,14 @@ namespace KParfume.Infrastructure.Database
         public DbSet<Kupon> Kupon { get; set; }
         public DbSet<Ocena> Ocena { get; set; }
         public DbSet<Cenovnik> Cenovnik { get; set; }
-        public DbSet<StavkaCenovnika> StavkaCenovnika { get; set; }
+        public DbSet<StavkaCenovnika> Stavka_cenovnika { get; set; }
         public DbSet<Korpa> Korpa { get; set; }
-        public DbSet<StavkaKorpe> StavkaKorpe { get; set; }
+        public DbSet<StavkaKorpe> Stavka_korpe { get; set; }
         public DbSet<Kupovina> Kupovina { get; set; }
-        public DbSet<StavkaKupovine> StavkaKupovine { get; set; }
+        public DbSet<StavkaKupovine> Stavka_kupovine { get; set; }
+
+        public DbSet<Izvestaj> Izvestaj { get; set; }
+        public DbSet<Recenzija> Recenzija { get; set; }
 
         public Context(DbContextOptions<Context> options) : base(options){}
 
@@ -225,6 +228,36 @@ namespace KParfume.Infrastructure.Database
                       .IsRequired();
 
             });
+
+            modelBuilder.Entity<Izvestaj>(entity =>
+            {
+                entity.HasOne(i => i.User)
+                      .WithMany()
+                      .HasForeignKey(i => i.izv_kor_id)
+                      .IsRequired();
+
+                entity.Property(i=>i.izv_datum).IsRequired();
+            });
+
+            modelBuilder.Entity<Recenzija>(entity =>
+            {
+                entity.HasOne(r => r.User)
+                      .WithMany()
+                      .HasForeignKey(r => r.rec_kor_id)
+                      .IsRequired();
+
+                entity.HasOne(r => r.Kupovina)
+                     .WithMany()
+                     .HasForeignKey(r=>r.rec_kup_id)
+                     .IsRequired();
+
+                entity.Property(r => r.rec_tekst).IsRequired();
+                entity.Property(r => r.rec_ocena).IsRequired();
+                entity.Property(r => r.rec_status).IsRequired();
+            });
+
+
+
         }
     }
 }

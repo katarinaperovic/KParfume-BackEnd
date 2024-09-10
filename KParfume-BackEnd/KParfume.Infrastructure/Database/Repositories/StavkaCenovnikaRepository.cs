@@ -19,40 +19,40 @@ namespace KParfume.Infrastructure.Database.Repositories
 
         public StavkaCenovnika Create(StavkaCenovnika stavkaCenovnika)
         {
-            _dbContext.StavkaCenovnika.Add(stavkaCenovnika);
+            _dbContext.Stavka_cenovnika.Add(stavkaCenovnika);
             _dbContext.SaveChanges();
             return stavkaCenovnika;
         }
 
         public StavkaCenovnika GetByParfemId(long id)
         {
-            return _dbContext.StavkaCenovnika
+            return _dbContext.Stavka_cenovnika
                                  .Where(c => c.sc_par_id == id)
                                  .FirstOrDefault();
         }
         public StavkaCenovnika Get(long id)
         {
-            return _dbContext.StavkaCenovnika.Find(id);
+            return _dbContext.Stavka_cenovnika.Find(id);
         }
 
         public StavkaCenovnika getByParfemId(long parfemId)
         {
-            return _dbContext.StavkaCenovnika.Where(s => s.sc_par_id == parfemId).FirstOrDefault();
+            return _dbContext.Stavka_cenovnika.Where(s => s.sc_par_id == parfemId).FirstOrDefault();
         }
 
         public List<StavkaCenovnika> GetAll()
         {
-            return _dbContext.StavkaCenovnika.ToList();
+            return _dbContext.Stavka_cenovnika.ToList();
         }
 
         public List<StavkaCenovnika> GetAllByCenovnikId( long cenovnikId)
         {
-            return _dbContext.StavkaCenovnika.Where(s=> s.sc_cen_id == cenovnikId).ToList();
+            return _dbContext.Stavka_cenovnika.Where(s=> s.sc_cen_id == cenovnikId).ToList();
         }
 
         public void Remove(StavkaCenovnika stavkaCenovnika)
         {
-            _dbContext.StavkaCenovnika.Remove(stavkaCenovnika);
+            _dbContext.Stavka_cenovnika.Remove(stavkaCenovnika);
             _dbContext.SaveChanges();
         }
 

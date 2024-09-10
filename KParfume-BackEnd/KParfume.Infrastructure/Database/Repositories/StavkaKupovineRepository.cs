@@ -19,24 +19,24 @@ namespace KParfume.Infrastructure.Database.Repositories
 
         public StavkaKupovine Create(StavkaKupovine stavkaKupovine)
         {
-            _dbContext.StavkaKupovine.Add(stavkaKupovine);
+            _dbContext.Stavka_kupovine.Add(stavkaKupovine);
             _dbContext.SaveChanges();
             return stavkaKupovine;
         }
 
         public StavkaKupovine Get(long id)
         {
-            return _dbContext.StavkaKupovine.Find(id);
+            return _dbContext.Stavka_kupovine.Find(id);
         }
 
         public List<StavkaKupovine> GetAll()
         {
-            return _dbContext.StavkaKupovine.ToList();
+            return _dbContext.Stavka_kupovine.ToList();
         }
 
         public List<StavkaKupovine> GetAllByKupovinaId(long id)
         {
-            return _dbContext.StavkaKupovine.Where(x => x.sk_kup_id == id).ToList();
+            return _dbContext.Stavka_kupovine.Where(x => x.sk_kup_id == id).ToList();
         }
 
     }
