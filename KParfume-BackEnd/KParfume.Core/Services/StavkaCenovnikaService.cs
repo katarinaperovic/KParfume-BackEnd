@@ -48,6 +48,17 @@ namespace KParfume.Core.Services
             return MapToDto(stavkaCenovnika);
         }
 
+        public StavkaCenovnikaDto GetByParfemId(long id)
+        {
+            StavkaCenovnika sc = _stavkaCenovnikaRepository.GetByParfemId(id);
+            if (sc == null)
+            {
+                return null;
+            }
+
+            return MapToDto(sc);
+        }
+
         public Result<List<StavkaCenovnikaDto>> GetAll()
         {
             var stavkaCenovnikas = _stavkaCenovnikaRepository.GetAll().ToList();
@@ -72,6 +83,26 @@ namespace KParfume.Core.Services
             return MapToDto(stavkaCenovnikas);
         }
 
+
+
+        public Result<StavkaCenovnikaDto> Update(long id, StavkaCenovnikaDto dto)
+        {
+            StavkaCenovnika s = _stavkaCenovnikaRepository.Get(id);
+            if (s == null)
+            {
+                return Result.Fail(FailureCode.NotFound);
+            }
+            try
+            {
+                s.Update(dto.sc_cena,dto.sc_par_id,dto.sc_cen_id);
+                _stavkaCenovnikaRepository.Save();
+                return MapToDto(s);
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail(FailureCode.InvalidArgument).WithError(ex.Message);
+            }
+        }
 
     }
 }

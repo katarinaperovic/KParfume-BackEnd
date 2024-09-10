@@ -22,5 +22,12 @@ namespace KParfume.Core.Domain
             this.sc_cen_id = sc_cen_id;
         }
 
+        public void Update(double sc_cena, long sc_par_id, long sc_cen_id)
+        {
+            this.sc_cena = sc_cena;
+            this.sc_par_id = sc_par_id;
+            this.sc_cen_id = sc_cen_id;
+        }
+
     }
 }

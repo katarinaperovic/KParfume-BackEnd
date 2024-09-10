@@ -24,6 +24,12 @@ namespace KParfume.Infrastructure.Database.Repositories
             return stavkaCenovnika;
         }
 
+        public StavkaCenovnika GetByParfemId(long id)
+        {
+            return _dbContext.StavkaCenovnika
+                                 .Where(c => c.sc_par_id == id)
+                                 .FirstOrDefault();
+        }
         public StavkaCenovnika Get(long id)
         {
             return _dbContext.StavkaCenovnika.Find(id);
@@ -50,6 +56,10 @@ namespace KParfume.Infrastructure.Database.Repositories
             _dbContext.SaveChanges();
         }
 
+        public void Save()
+        {
+            _dbContext.SaveChanges();
+        }
 
 
     }

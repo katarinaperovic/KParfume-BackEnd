@@ -12,6 +12,8 @@ namespace KParfume.API.Public
     {
         Result<StavkaCenovnikaDto> Create(StavkaCenovnikaDto stavkaCenovnikaDto);
         StavkaCenovnikaDto Get(long id);
+        StavkaCenovnikaDto GetByParfemId(long id);
+        Result<StavkaCenovnikaDto> Update(long id, StavkaCenovnikaDto dto);
         Result<List<StavkaCenovnikaDto>> GetAll();
         Result<StavkaCenovnikaDto> Remove(long id);
         Result<List<StavkaCenovnikaDto>> GetAllByCenovnikId(long cenovnikId);

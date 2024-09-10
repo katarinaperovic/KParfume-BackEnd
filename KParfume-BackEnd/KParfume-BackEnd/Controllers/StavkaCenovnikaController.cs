@@ -60,6 +60,17 @@ namespace KParfume_BackEnd.Controllers
             return NotFound();
         }
 
+        [HttpGet("parfemId/{id}")]
+        public ActionResult GetByParfemId(long id)
+        {
+            var result = _stavkaCenovnikaService.GetByParfemId(id);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            return NotFound();
+        }
+
         [HttpDelete]
         public ActionResult Remove(long id)
         {
@@ -70,6 +81,19 @@ namespace KParfume_BackEnd.Controllers
             }
             return BadRequest(result.Errors);
         }
+
+        [HttpPut("{id}")]
+        public ActionResult Update(long id, [FromBody] StavkaCenovnikaDto scDto)
+        {
+            var result = _stavkaCenovnikaService.Update(id, scDto);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return BadRequest(result.Errors);
+        }
+
+       
 
 
 
