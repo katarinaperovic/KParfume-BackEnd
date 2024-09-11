@@ -13,7 +13,7 @@ namespace KParfume.Core.Domain
         public virtual User Korisnik { get; private set; }
         public long kup_fab_id { get; private set; }
         public virtual Fabrika Fabrika { get; private set; }
-        public DateOnly kup_datum { get; private set; }
+        public DateTime kup_datum { get; private set; }
         public long? kup_kpn_id { get; private set; }
         public virtual Kupon Kupon { get; private set; }
 
@@ -29,7 +29,7 @@ namespace KParfume.Core.Domain
         public string PaymentStatus { get; private set; }
         public string PayPalPaymentIntentId { get; private set; }*/
 
-        public Kupovina(long kup_kor_id, long kup_fab_id, DateOnly kup_datum, long? kup_kpn_id, double uk_cena, string kup_valuta, string kup_status, string kup_pp_id)
+        public Kupovina(long kup_kor_id, long kup_fab_id, DateTime kup_datum, long? kup_kpn_id, double uk_cena, string kup_valuta, string kup_status, string kup_pp_id)
         {
             this.kup_kor_id = kup_kor_id;
             this.kup_fab_id = kup_fab_id;

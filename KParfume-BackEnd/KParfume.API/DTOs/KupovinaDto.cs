@@ -11,7 +11,7 @@ namespace KParfume.API.DTOs
         public long Id { get; set; }
         public long kup_kor_id { get; set; }
         public long kup_fab_id { get; set; }
-        public DateOnly kup_datum { get; set; }
+        public DateTime kup_datum { get; set; }
         public long? kup_kpn_id { get; set; }
         
         //PAYPAL FIELDS

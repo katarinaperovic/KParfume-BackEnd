@@ -13,8 +13,9 @@ namespace KParfume.Core.Domain
         public string fab_vreme_do { get; private set; }
         public string fab_tel { get; private set; }
         public string fab_logo { get; private set; }
+        public double fab_ocena { get; private set; }
 
-        public Fabrika(string fab_naziv, string fab_adresa, string fab_grad, int fab_pos_br, string fab_drzava, string fab_vreme_od, string fab_vreme_do, string fab_tel, string fab_logo)
+        public Fabrika(string fab_naziv, string fab_adresa, string fab_grad, int fab_pos_br, string fab_drzava, string fab_vreme_od, string fab_vreme_do, string fab_tel, string fab_logo, double fab_ocena)
         {
             this.fab_naziv = fab_naziv;
             this.fab_adresa = fab_adresa;
@@ -26,6 +27,7 @@ namespace KParfume.Core.Domain
             this.fab_tel = fab_tel;
             Validate();
             this.fab_logo = fab_logo;
+            this.fab_ocena = fab_ocena;
         }
 
         private void Validate()

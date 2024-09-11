@@ -13,5 +13,6 @@ namespace KParfume.API.DTOs
         public string fab_vreme_do { get; set; }
         public string fab_tel { get; set; }
         public string fab_logo { get; set; }
+        public double fab_ocena { get; set; }
     }
 }

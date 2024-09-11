@@ -83,6 +83,7 @@ namespace KParfume.Infrastructure.Database
                 entity.Property(p => p.par_mililitraza).IsRequired();
                 entity.Property(p => p.par_dostupan).IsRequired();
                 entity.Property(p => p.par_obrisan).IsRequired();
+
             });
 
             modelBuilder.Entity<Vest>(entity =>
