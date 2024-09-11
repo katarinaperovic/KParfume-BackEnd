@@ -33,6 +33,18 @@ namespace KParfume_BackEnd.Controllers
             return NotFound();
         }
 
+        [HttpGet("user/{id}")]
+        public ActionResult<KorpaDto> GetByUserId(long id)
+        {
+            var result = _korpaService.GetByUserId(id);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            return NotFound();
+        }
+
+
         [HttpGet]
         public ActionResult<List<KorpaDto>> GetAll()
         {

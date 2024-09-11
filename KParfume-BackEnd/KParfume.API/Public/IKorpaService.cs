@@ -16,6 +16,7 @@ namespace KParfume.API.Public
         Result<KorpaDto> Remove(long id);
         Result<KorpaDto> KorpaPrazna(long id);
         Result<KorpaDto> KorpaNijePrazna(long id);
+        KorpaDto GetByUserId(long id);
 
     }
 }

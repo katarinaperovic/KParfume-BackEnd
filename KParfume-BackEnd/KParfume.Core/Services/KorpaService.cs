@@ -49,6 +49,17 @@ namespace KParfume.Core.Services
             return MapToDto(korpa);
         }
 
+        public KorpaDto GetByUserId(long id)
+        {
+            Korpa korpa = _korpaRepository.GetByUserId(id);
+            if (korpa == null)
+            {
+                return null;
+            }
+
+            return MapToDto(korpa);
+        }
+
         public Result<List<KorpaDto>> GetAll()
         {
             var korpe = _korpaRepository.GetAll().ToList();
