@@ -1,5 +1,6 @@
 ﻿using KParfume.Core.Domain;
 using KParfume.Core.Domain.RepositoryInterfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,14 @@ namespace KParfume.Infrastructure.Database.Repositories
 
         public void Save()
         {
-            _dbContext.SaveChanges();
+            try
+            {
+                _dbContext.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                Console.WriteLine($"Concurrency issue: {ex.Message}");
+            }
         }
 
     }
