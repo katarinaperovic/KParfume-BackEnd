@@ -63,6 +63,13 @@ namespace KParfume.Infrastructure.Database.Repositories
             _dbContext.SaveChanges();
         }
 
+        public StavkaKorpe FindByParfemIdAndKorpaId(long parfemId, long korpaId)
+        {
+            return _dbContext.Stavka_korpe
+                .FirstOrDefault(s => s.skrp_par_id == parfemId && s.skrp_krp_id == korpaId);
+        }
+
+
         public void Save()
         {
             _dbContext.SaveChanges();

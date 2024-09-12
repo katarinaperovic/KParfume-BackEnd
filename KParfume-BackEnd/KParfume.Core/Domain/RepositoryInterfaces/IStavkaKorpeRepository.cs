@@ -14,6 +14,7 @@ namespace KParfume.Core.Domain.RepositoryInterfaces
         List<StavkaKorpe> GetAllByKorpaId(long id);
         void Remove(StavkaKorpe stavkaKorpe);
         void RemoveAllByKorpaId(long id);
+        StavkaKorpe FindByParfemIdAndKorpaId(long parfemId, long korpaId);
         void Save(); 
 
     }

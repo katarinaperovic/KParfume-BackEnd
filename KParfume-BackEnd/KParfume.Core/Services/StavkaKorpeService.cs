@@ -30,17 +30,31 @@ namespace KParfume.Core.Services
         {
             try
             {
+                // Check if combination of skrp_par_id and skrp_krp_id already exists in the database
+                var existingStavkaKorpe = _stavkaKorpeRepository
+                    .FindByParfemIdAndKorpaId(stavkaKorpeDto.skrp_par_id, stavkaKorpeDto.skrp_krp_id);
+
+                if (existingStavkaKorpe != null)
+                {
+                    return Result.Fail(FailureCode.Internal).WithError("A StavkaKorpe with the same Parfem ID and Korpa ID already exists.");
+                }
+
+                // Fetch the price based on parfem id
                 var cena = _stavkaCenovnikaRepository.getByParfemId(stavkaKorpeDto.skrp_par_id);
                 stavkaKorpeDto.skrp_cena_pj = cena.sc_cena;
 
+                // Map DTO to domain model
                 StavkaKorpe stavkaKorpe = MapToDomain(stavkaKorpeDto);
-                                
+
+                // Create the new StavkaKorpe
                 stavkaKorpe = _stavkaKorpeRepository.Create(stavkaKorpe);
 
+                // Update the Korpa status
                 Korpa korpa = _korpaRepository.Get(stavkaKorpe.skrp_krp_id);
                 korpa.KorpaNijePrazna();
                 _korpaRepository.Save();
-                
+
+                // Return success with the created StavkaKorpe
                 return Result.Ok<StavkaKorpeDto>(MapToDto(stavkaKorpe));
             }
             catch (Exception ex)
@@ -48,6 +62,7 @@ namespace KParfume.Core.Services
                 return Result.Fail(FailureCode.InvalidArgument).WithError(ex.Message);
             }
         }
+
 
         public StavkaKorpeDto Get(long id)
         {
