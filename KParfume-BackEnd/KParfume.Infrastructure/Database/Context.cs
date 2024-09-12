@@ -210,7 +210,7 @@ namespace KParfume.Infrastructure.Database
                       .HasForeignKey(k => k.kup_kpn_id)
                       .IsRequired(false);
 
-                entity.Property(k => k.uk_cena).IsRequired();
+                entity.Property(k => k.kup_uk_cena).IsRequired();
                 entity.Property(k => k.kup_valuta).IsRequired();
                 entity.Property(k => k.kup_status).IsRequired();
                 entity.Property(k => k.kup_pp_id).IsRequired();

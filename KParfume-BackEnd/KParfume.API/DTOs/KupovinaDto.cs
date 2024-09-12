@@ -15,7 +15,7 @@ namespace KParfume.API.DTOs
         public long? kup_kpn_id { get; set; }
         
         //PAYPAL FIELDS
-        public double uk_cena { get; set; } // Amount
+        public double kup_uk_cena { get; set; } // Amount
         public string kup_valuta { get; set; } // Currency
         public string kup_status { get; set; } // PaymentStatus
         public string kup_pp_id { get; set; } // PayPalPaymentIntentId
