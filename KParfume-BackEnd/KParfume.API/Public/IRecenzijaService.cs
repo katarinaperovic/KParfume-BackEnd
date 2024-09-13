@@ -7,6 +7,8 @@ namespace KParfume.API.Public
     {
         Result<RecenzijaDto> Create(RecenzijaDto recenzijaDto);
         Result<RecenzijaDto> Update(long id, RecenzijaDto dto);
+
+        Result<List<RecenzijaDto>> GetAll();
         Result<List<RecenzijaDto>> GetRecenzijeByFabrikaId(long fabrikaId);
 
     }

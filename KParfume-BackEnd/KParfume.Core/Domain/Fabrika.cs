@@ -30,6 +30,11 @@ namespace KParfume.Core.Domain
             this.fab_ocena = fab_ocena;
         }
 
+        public void UpdateRating(double newAverageRating)
+        {
+            fab_ocena = newAverageRating;
+        }
+
         private void Validate()
         {
             if (string.IsNullOrWhiteSpace(fab_naziv)) throw new ArgumentException("Invalid fab_naziv");

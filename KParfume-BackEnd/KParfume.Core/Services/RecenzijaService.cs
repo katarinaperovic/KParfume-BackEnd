@@ -14,31 +14,41 @@ namespace KParfume.Core.Services
     {
         protected readonly IRecenzijaRepository _recenzijaRepository;
         protected readonly IKupovinaRepository _kupovinaRepository;
+        protected readonly IFabrikaRepository _fabrikaRepository;
 
 
-        public RecenzijaService(IRecenzijaRepository recenzijaRepository, IKupovinaRepository kupovinaRepository, IMapper mapper) : base(mapper)
+        public RecenzijaService(IRecenzijaRepository recenzijaRepository, IKupovinaRepository kupovinaRepository, IFabrikaRepository fabrikaRepository, IMapper mapper) : base(mapper)
         {
             _recenzijaRepository = recenzijaRepository;
             _kupovinaRepository = kupovinaRepository;
+            _fabrikaRepository = fabrikaRepository;
         }
 
         public Result<RecenzijaDto> Create(RecenzijaDto recenzijaDto)
         {
             try
             {
-              /*  var rec = new Recenzija(
-                    rDto.rec_ocena,
-                    rDto.rec_tekst,
-                    (StatusRecenzije)rDto.rec_status,
-                    rDto.rec_kor_id,
-                    rDto.rec_kup_id
-                );
-                
-                
-                Recenzija r = _recenzijaRepository.Create(rec);*/
+              
 
                 Recenzija recenzija = MapToDomain(recenzijaDto);
                 recenzija = _recenzijaRepository.Create(recenzija);
+
+
+               
+                var kupovina = _kupovinaRepository.Get(recenzija.rec_kup_id);
+                if (kupovina == null)
+                {
+                    return Result.Fail(FailureCode.InvalidArgument).WithError("Invalid purchase ID");
+                }
+
+                var fabrika = _fabrikaRepository.Get(kupovina.kup_fab_id);
+                if (fabrika == null)
+                {
+                    return Result.Fail(FailureCode.InvalidArgument).WithError("Invalid factory ID");
+                }
+
+                UpdateFactoryAverageRating(fabrika, recenzija.rec_ocena);
+                _fabrikaRepository.Save();
 
                 return Result.Ok<RecenzijaDto>(MapToDto(recenzija));
             }
@@ -46,6 +56,27 @@ namespace KParfume.Core.Services
             {
                 return Result.Fail(FailureCode.InvalidArgument).WithError(ex.Message);
             }
+        }
+
+
+
+        private void UpdateFactoryAverageRating(Fabrika fabrika, double newRating)
+        {
+            // Get all reviews related to the factory
+            var recenzije = _recenzijaRepository.GetAll()
+                                .Where(r => r.rec_kup_id == fabrika.Id)
+                                .ToList();
+
+            int totalReviews = recenzije.Count;
+
+            // Sum up all existing ratings from the reviews
+            double currentTotalRating = recenzije.Sum(r => r.rec_ocena);
+
+            // Calculate the updated average rating by adding the new rating
+            double updatedAverageRating = (currentTotalRating + newRating) / (totalReviews + 1);
+
+            // Update the factory's average rating
+            fabrika.UpdateRating(updatedAverageRating);
         }
 
 
@@ -83,6 +114,12 @@ namespace KParfume.Core.Services
             }
         }
 
+
+        public Result<List<RecenzijaDto>> GetAll()
+        {
+            var recenzije = _recenzijaRepository.GetAll().ToList();
+            return MapToDto(recenzije);
+        }
 
         public Result<List<RecenzijaDto>> GetRecenzijeByFabrikaId(long fabrikaId)
         {

@@ -40,6 +40,17 @@ namespace KParfume_BackEnd.Controllers
             return NotFound();
         }
 
+        [HttpGet]
+        public ActionResult GetAll()
+        {
+            var result = _recenzijaService.GetAll();
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return NotFound();
+        }
+
         [HttpPut("{id}")]
         public ActionResult Update(long id, [FromBody] RecenzijaDto recenzijaDto)
         {
