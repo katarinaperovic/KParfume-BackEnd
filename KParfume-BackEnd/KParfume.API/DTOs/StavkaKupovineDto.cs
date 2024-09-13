@@ -12,6 +12,6 @@ namespace KParfume.API.DTOs
         public double sk_cena_pj { get; set; }
         public long sk_par_id { get; set; }
         public long sk_kup_id { get; set; }
-        public double sk_kolicina { get; set; }
+        public int sk_kolicina { get; set; }
     }
 }
