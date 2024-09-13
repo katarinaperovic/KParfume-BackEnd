@@ -10,6 +10,7 @@ namespace KParfume.API.Public
 {
     public interface IIzvestajService
     {
+        Result<IzvestajDto> Create(IzvestajDto izvestajDto, long fabrikaId);
         Result<List<IzvestajDto>> GetAllForAuthor(long authorId);
     }
 }

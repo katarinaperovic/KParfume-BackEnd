@@ -12,6 +12,7 @@ namespace KParfume.Core.Domain.RepositoryInterfaces
         StavkaKupovine Get(long id);
         List<StavkaKupovine> GetAll();
         List<StavkaKupovine> GetAllByKupovinaId(long id);
+        List<StavkaKupovine> GetAllByFabrikaId(long fabrikaId);
 
     }
 }

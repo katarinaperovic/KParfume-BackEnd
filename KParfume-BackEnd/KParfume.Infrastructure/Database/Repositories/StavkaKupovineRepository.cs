@@ -39,5 +39,13 @@ namespace KParfume.Infrastructure.Database.Repositories
             return _dbContext.Stavka_kupovine.Where(x => x.sk_kup_id == id).ToList();
         }
 
+        public List<StavkaKupovine> GetAllByFabrikaId(long fabrikaId)
+        {
+            // Assuming you have access to the DbContext and your StavkaKupovine entity is mapped correctly.
+            return _dbContext.Stavka_kupovine
+                             .Where(sk => sk.Kupovina.kup_fab_id == fabrikaId)
+                             .ToList();
+        }
+
     }
 }

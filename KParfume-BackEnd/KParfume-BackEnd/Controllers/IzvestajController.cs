@@ -17,7 +17,22 @@ namespace KParfume_BackEnd.Controllers
             _izvestajService = izvestajService;
         }
 
-       
+        [HttpPost("{fabrikaId}")]
+        public IActionResult Create([FromBody] IzvestajDto izvestajDto, long fabrikaId)
+        {
+            var result = _izvestajService.Create(izvestajDto, fabrikaId);
+            return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Errors);
+        }
+
+        [HttpGet("manager/{id}")]
+        public IActionResult GetAll(long id)
+        {
+            var result = _izvestajService.GetAllForAuthor(id);
+            return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Errors);
+        }
+
+
+
 
     }
 }

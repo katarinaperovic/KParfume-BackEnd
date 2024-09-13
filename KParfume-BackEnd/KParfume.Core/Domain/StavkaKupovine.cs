@@ -23,5 +23,10 @@ namespace KParfume.Core.Domain
             this.sk_kup_id = sk_kup_id;            
             this.sk_kolicina = sk_kolicina;
         }
+
+        public void SetParfem(Parfem parfem)
+        {
+            this.Parfem = parfem;
+        }
     }
 }
