@@ -25,6 +25,8 @@ namespace KParfume.Infrastructure.Database
         public DbSet<Izvestaj> Izvestaj { get; set; }
         public DbSet<Recenzija> Recenzija { get; set; }
 
+        public DbSet<Favorit> Favorit { get; set; }
+
         public Context(DbContextOptions<Context> options) : base(options){}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -257,6 +259,21 @@ namespace KParfume.Infrastructure.Database
                 entity.Property(r => r.rec_status).IsRequired();
             });
 
+
+            modelBuilder.Entity<Favorit>(entity =>
+            {
+                entity.HasOne(f => f.User)
+                      .WithMany()
+                      .HasForeignKey(f => f.fav_kor_id)
+                      .IsRequired();
+
+                entity.HasOne(f => f.Parfem)
+                      .WithMany()
+                      .HasForeignKey(f => f.fav_par_id)
+                      .IsRequired();
+
+                entity.Property(f => f.fav_dat).IsRequired();
+            });
 
 
         }

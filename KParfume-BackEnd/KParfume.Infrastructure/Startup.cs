@@ -45,6 +45,7 @@ namespace KParfume.Infrastructure
             services.AddScoped<IStavkaKupovineService, StavkaKupovineService>();
             services.AddScoped<IIzvestajService, IzvestajService>();
             services.AddScoped<IRecenzijaService, RecenzijaService>();
+            services.AddScoped<IFavoritService, FavoritService>();
         }
 
         private static void SetupInfrastructure(IServiceCollection services)
@@ -67,6 +68,7 @@ namespace KParfume.Infrastructure
             services.AddScoped(typeof(ICrudRepository<StavkaKupovine>), typeof(CrudDatabaseRepository<StavkaKupovine, Context>));
             services.AddScoped(typeof(ICrudRepository<Izvestaj>), typeof(CrudDatabaseRepository<Izvestaj, Context>));
             services.AddScoped(typeof(ICrudRepository<Recenzija>), typeof(CrudDatabaseRepository<Recenzija, Context>));
+            services.AddScoped(typeof(ICrudRepository<Favorit>), typeof(CrudDatabaseRepository<Favorit, Context>));
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFabrikaRepository, FabrikaRepository>();
@@ -86,6 +88,7 @@ namespace KParfume.Infrastructure
             services.AddScoped<IStavkaKupovineRepository, StavkaKupovineRepository>();
             services.AddScoped<IIzvestajRepository, IzvestajRepository>();
             services.AddScoped<IRecenzijaRepository, RecenzijaRepository>();
+            services.AddScoped<IFavoritRepository, FavoritRepository>();
 
             services.AddDbContext<Context>(opt =>
                 opt.UseNpgsql(DbConnectionStringBuilder.Build("KParfumeSchema"),
