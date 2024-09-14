@@ -7,6 +7,7 @@ namespace KParfume.Core.Domain.RepositoryInterfaces
         Favorit FindByParfemIdAndUserId(long parfemId, long userId);
         List<Favorit> GetAll();
         void Delete(Favorit favorit);
+        IEnumerable<Favorit> GetByUserIdWithParfem(long userId);
         void Save();
     }
 }

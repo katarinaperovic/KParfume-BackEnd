@@ -11,10 +11,12 @@ namespace KParfume.Core.Services
     public class FavoritService : BaseService<FavoritDto, Favorit>, IFavoritService
     {
         protected readonly IFavoritRepository _favoritRepository;
+        private readonly IMapper _mapper;
 
         public FavoritService(IFavoritRepository favoritRepository, IMapper mapper) : base(mapper)
         {
             _favoritRepository = favoritRepository;
+            _mapper = mapper;
         }
 
         public Result<FavoritDto> Create(FavoritDto favoritDto)
@@ -55,6 +57,29 @@ namespace KParfume.Core.Services
                 _favoritRepository.Save();
 
                 return Result.Ok();
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail(FailureCode.Internal).WithError(ex.Message);
+            }
+        }
+
+        public Result<List<(FavoritDto, ParfemDto)>> GetFavoritesByUserId(long userId)
+        {
+            try
+            {
+                var favoriti = _favoritRepository.GetByUserIdWithParfem(userId).ToList();
+                var result = new List<(FavoritDto, ParfemDto)>();
+
+                // Map Favorit and Parfem separately
+                foreach (var favorit in favoriti)
+                {
+                    var favoritDto = _mapper.Map<FavoritDto>(favorit);
+                    var parfemDto = _mapper.Map<ParfemDto>(favorit.Parfem);
+                    result.Add((favoritDto, parfemDto));
+                }
+
+                return Result.Ok(result);
             }
             catch (Exception ex)
             {

@@ -8,6 +8,7 @@ namespace KParfume.API.Public
         Result<FavoritDto> Create(FavoritDto favoritDto);
         Result RemoveFavorite(long parfemId, long userId);
         Result<List<FavoritDto>> GetAll();
+        Result<List<(FavoritDto, ParfemDto)>> GetFavoritesByUserId(long userId);
 
     }
 }
