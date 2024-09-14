@@ -68,7 +68,35 @@ namespace KParfume.Core.Services
             }
         }
 
+        public Result<KuponDto> GetKuponByKodAndUserId(string kod, long userId)
+        {
+            Kupon kupon = _kuponRepository.GetKuponByKodAndUserId(kod,userId);
+            if (kupon == null)
+            {
+                return null;
+            }
 
+            return MapToDto(kupon);
+        }
+
+        public Result<KuponDto> KuponIskoriscen(long id)
+        {
+            Kupon kupon = _kuponRepository.Get(id);
+            if (kupon == null)
+            {
+                return Result.Fail(FailureCode.NotFound);
+            }
+            try
+            {
+                kupon.SetKuponIskoriscen();
+                _kuponRepository.Save();
+                return MapToDto(kupon);
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail(FailureCode.InvalidArgument).WithError(ex.Message);
+            }
+        }
 
     }
 }

@@ -48,7 +48,23 @@ namespace KParfume_BackEnd.Controllers
             return CreateResponse(result);
         }
 
-       
+        [HttpGet("kod-user/{kod}/{userId}")]
+        public ActionResult<KuponDto> GetKuponByKodAndUserId(string kod, long userId)
+        {
+            var result = _kuponService.GetKuponByKodAndUserId(kod, userId);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return CreateResponse(result);
+        }
+
+        [HttpPut("iskoriscen/{id}")]
+        public ActionResult KuponIskoriscen(long id)
+        {
+            var result = _kuponService.KuponIskoriscen(id);
+            return CreateResponse(result);
+        }
 
     }
 }

@@ -35,6 +35,11 @@ namespace KParfume.Infrastructure.Database.Repositories
         {
             return _dbContext.Kupon.ToList();
         }
+
+        public Kupon GetKuponByKodAndUserId(string kod, long userId)
+        {
+            return _dbContext.Kupon.Where(k => k.kpn_kod == kod && k.kpn_kor_id == userId && k.kpn_aktivan).FirstOrDefault();
+        }   
         public void Save()
         {
             _dbContext.SaveChanges();

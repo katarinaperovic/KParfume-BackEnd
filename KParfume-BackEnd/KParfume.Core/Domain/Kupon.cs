@@ -23,6 +23,10 @@ namespace KParfume.Core.Domain
             this.kpn_pk_valid = kpn_pk_valid;
         }
 
+        public void SetKuponIskoriscen()
+        {
+            kpn_aktivan = false;
+        }
 
     }
 }
