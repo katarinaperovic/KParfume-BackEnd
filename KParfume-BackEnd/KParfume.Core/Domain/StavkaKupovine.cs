@@ -28,5 +28,9 @@ namespace KParfume.Core.Domain
         {
             this.Parfem = parfem;
         }
+        public void ApplyDiscount(double discountPercentage)
+        {
+            sk_cena_pj *= (1 - discountPercentage / 100.0);
+        }
     }
 }

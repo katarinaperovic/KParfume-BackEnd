@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace KParfume.Infrastructure.Database.Repositories
 {
@@ -39,13 +40,22 @@ namespace KParfume.Infrastructure.Database.Repositories
             return _dbContext.Stavka_kupovine.Where(x => x.sk_kup_id == id).ToList();
         }
 
+        /*        public List<StavkaKupovine> GetAllByFabrikaId(long fabrikaId)
+                {
+                    // Assuming you have access to the DbContext and your StavkaKupovine entity is mapped correctly.
+                    return _dbContext.Stavka_kupovine
+                                     .Where(sk => sk.Kupovina.kup_fab_id == fabrikaId)
+                                     .ToList();
+                }*/
         public List<StavkaKupovine> GetAllByFabrikaId(long fabrikaId)
         {
-            // Assuming you have access to the DbContext and your StavkaKupovine entity is mapped correctly.
             return _dbContext.Stavka_kupovine
+                             .Include(sk => sk.Kupovina)  // Ensure Kupovina is loaded
+                             .ThenInclude(k => k.Kupon)   // Optionally load Kupon if it's directly accessible from Kupovina
                              .Where(sk => sk.Kupovina.kup_fab_id == fabrikaId)
                              .ToList();
         }
+
 
     }
 }
