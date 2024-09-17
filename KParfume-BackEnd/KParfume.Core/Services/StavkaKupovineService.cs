@@ -16,17 +16,22 @@ namespace KParfume.Core.Services
     public class StavkaKupovineService : BaseService<StavkaKupovineDto,StavkaKupovine> ,IStavkaKupovineService
     {
         protected readonly IStavkaKupovineRepository _stavkaKupovineRepository;
-        public StavkaKupovineService(IStavkaKupovineRepository stavkaKupovineRepository, IMapper mapper) : base(mapper)
+        protected readonly IParfemRepository _parfemRepository;
+        public StavkaKupovineService(IStavkaKupovineRepository stavkaKupovineRepository,IParfemRepository parfemRepository, IMapper mapper) : base(mapper)
         {
             _stavkaKupovineRepository = stavkaKupovineRepository;
+            _parfemRepository = parfemRepository;
         }
 
         public Result<StavkaKupovineDto> Create(StavkaKupovineDto stavkaKupovineDto)
         {
             try
             {
+                Parfem parfem = _parfemRepository.Get(stavkaKupovineDto.sk_par_id);
                 StavkaKupovine stavkaKupovine = MapToDomain(stavkaKupovineDto);
                 stavkaKupovine = _stavkaKupovineRepository.Create(stavkaKupovine);
+                parfem.UpdateKolicina(parfem.par_kolicina - stavkaKupovine.sk_kolicina);
+                _parfemRepository.Save();
 
                 return Result.Ok<StavkaKupovineDto>(MapToDto(stavkaKupovine));
             }

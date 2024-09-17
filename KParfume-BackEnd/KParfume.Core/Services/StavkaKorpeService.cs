@@ -18,12 +18,14 @@ namespace KParfume.Core.Services
         protected readonly IStavkaKorpeRepository _stavkaKorpeRepository;
         protected readonly IKorpaRepository _korpaRepository;
         protected readonly IStavkaCenovnikaRepository _stavkaCenovnikaRepository;
+        protected readonly IParfemRepository _parfemRepository;
 
-        public StavkaKorpeService(IStavkaKorpeRepository stavkaKorpeRepository,IKorpaRepository korpaRepository,IStavkaCenovnikaRepository stavkaCenovnikaRepository, IMapper mapper) : base(mapper)
+        public StavkaKorpeService(IStavkaKorpeRepository stavkaKorpeRepository,IKorpaRepository korpaRepository,IStavkaCenovnikaRepository stavkaCenovnikaRepository,IParfemRepository parfemRepository, IMapper mapper) : base(mapper)
         {
             _stavkaKorpeRepository = stavkaKorpeRepository;
             _korpaRepository = korpaRepository;
             _stavkaCenovnikaRepository = stavkaCenovnikaRepository;
+            _parfemRepository = parfemRepository;
         }
 
         public Result<StavkaKorpeDto> Create(StavkaKorpeDto stavkaKorpeDto)
@@ -33,12 +35,16 @@ namespace KParfume.Core.Services
                 // Check if combination of skrp_par_id and skrp_krp_id already exists in the database
                 var existingStavkaKorpe = _stavkaKorpeRepository
                     .FindByParfemIdAndKorpaId(stavkaKorpeDto.skrp_par_id, stavkaKorpeDto.skrp_krp_id);
+                Parfem parfem = _parfemRepository.Get(stavkaKorpeDto.skrp_par_id);
 
                 if (existingStavkaKorpe != null)
                 {
                     return Result.Fail(FailureCode.Internal).WithError("A StavkaKorpe with the same Parfem ID and Korpa ID already exists.");
                 }
-
+                else if(parfem.par_kolicina < 1)
+                {
+                    return Result.Fail(FailureCode.InvalidArgument).WithError("Nemate dovoljno proizvoda na stanju.");
+                }
                 // Fetch the price based on parfem id
                 var cena = _stavkaCenovnikaRepository.getByParfemId(stavkaKorpeDto.skrp_par_id);
                 stavkaKorpeDto.skrp_cena_pj = cena.sc_cena;
@@ -91,7 +97,7 @@ namespace KParfume.Core.Services
         {
             StavkaKorpe stavkaKorpe = _stavkaKorpeRepository.Get(id);
             Korpa korpa = _korpaRepository.Get(stavkaKorpe.skrp_krp_id);
-
+            
             if (stavkaKorpe == null)
             {
                 return Result.Fail(FailureCode.NotFound);
@@ -138,7 +144,13 @@ namespace KParfume.Core.Services
         {
             StavkaKorpe stavkaKorpe = _stavkaKorpeRepository.Get(id);
             Korpa korpa = _korpaRepository.Get(stavkaKorpe.skrp_krp_id);
+            Parfem parfem = _parfemRepository.Get(stavkaKorpe.skrp_par_id);
 
+
+            if (parfem.par_kolicina < stavkaKorpe.skrp_kolicina + 1)
+            {
+                return Result.Fail(FailureCode.InvalidArgument).WithError("Nemate dovoljno proizvoda na stanju.");
+            }
             if (stavkaKorpe == null)
             {
                 return Result.Fail(FailureCode.NotFound);
@@ -157,6 +169,7 @@ namespace KParfume.Core.Services
             }
 
             stavkaKorpe.KolicinaInkrement();
+
             _stavkaKorpeRepository.Save();
             return Result.Ok<StavkaKorpeDto>(MapToDto(stavkaKorpe));
         }
@@ -165,14 +178,20 @@ namespace KParfume.Core.Services
         {
             StavkaKorpe stavkaKorpe = _stavkaKorpeRepository.Get(id);
             Korpa korpa = _korpaRepository.Get(stavkaKorpe.skrp_krp_id);
+            Parfem parfem = _parfemRepository.Get(stavkaKorpe.skrp_par_id);
 
             if (stavkaKorpe == null)
             {
                 return Result.Fail(FailureCode.NotFound);
             }
+/*            if (parfem.par_kolicina < stavkaKorpe.skrp_kolicina)
+            {
+                return Result.Fail(FailureCode.InvalidArgument).WithError("Nemate dovoljno proizvoda na stanju.");
+            }*/
 
             stavkaKorpe.KolicinaDekrement();
-            if(stavkaKorpe.skrp_kolicina <= 0)
+
+            if (stavkaKorpe.skrp_kolicina <= 0)
             {
                 _stavkaKorpeRepository.Remove(stavkaKorpe);
                 _stavkaKorpeRepository.Save();
